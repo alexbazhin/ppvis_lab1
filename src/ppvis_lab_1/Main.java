@@ -4,11 +4,9 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        SimpleWindow window = new SimpleWindow("PPVIS-1");
-        window.setSize(850, 180);
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // window.setResizable(false);
-        window.setLocationRelativeTo(null);
+        JFrame simpleWindow = new SimpleWindow().createFrame("PPVIS-1");
+        simpleWindow.setSize(850, 180);
+        simpleWindow.setVisible(true);
+        simpleWindow.setLocationRelativeTo(null);
     }
 }

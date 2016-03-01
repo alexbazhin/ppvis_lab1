@@ -1,220 +1,280 @@
 package ppvis_lab_1;
 
+import javax.swing.Timer;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
-public class SimpleWindow extends JFrame {
-    JTextField textField;
-    JButton button;
+
+public class SimpleWindow {
+    Vector<JCheckBox> checkboxesList = new Vector<JCheckBox>();
+    boolean b=false;
+    JTextField addToList;
+    JButton sendComboBox;
     JComboBox comboBox;
 
-    JButton button21;
-    JButton button22;
-    JTextField textField2;
+    JButton rename;
+    JButton buttonForRename;
+    JTextField textForButton;
 
-    JTextField textField3;
-    JButton button3;
+    JTextField textForFlag;
+    JButton setForRadio;
     JRadioButton radioButton31;
     JRadioButton radioButton32;
     JRadioButton radioButton33;
 
-    JTextField textField4;
-    JButton button4;
-    JCheckBox checkBox41;
-    JCheckBox checkBox42;
-    JCheckBox checkBox43;
+    JTextField countCheck;
+    JButton addCheck;
+    JButton playStop;
 
-    JTextField textField5;
-    JButton button51;
-    JButton button52;
-    JButton button53;
+
+    JTextField textForTable;
+    JButton setValueOfTable;
+    JButton setValueOfCell2;
+    JButton setValueOfCell1;
     JTable table5;
-    Object[] headers = { "Column1", "Column2"};
+    Object[] headers = {"Column1", "Column2"};
     Object[][] data = {
-            { "", "" },
-            { "", "" },
-            { "", "" },
-            { "", "" },
-            { "", "" }
+            {"", ""},
+            {"", ""},
+            {"", ""},
+            {"", ""},
+            {"", ""}
     };
 
-    eHandler handler = new eHandler();
     ArrayList<String> list = new ArrayList<String>();
 
-    public SimpleWindow(String name) {
-        super(name);
+    public SimpleWindow() {
+        super();
+    }
 
+    public JFrame createFrame(String name) {
+        JFrame frame = new JFrame();
+        frame.setName(name);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Box box = Box.createHorizontalBox();
         Box box1 = Box.createVerticalBox();
         Box box2 = Box.createVerticalBox();
         Box box3 = Box.createVerticalBox();
         Box box4 = Box.createVerticalBox();
         Box box5 = Box.createVerticalBox();
+        Box box21 = Box.createHorizontalBox();
+        Box box51 = Box.createHorizontalBox();
 
         box1.setBorder(new TitledBorder("1"));
         box2.setBorder(new TitledBorder("2"));
         box3.setBorder(new TitledBorder("3"));
         box4.setBorder(new TitledBorder("4"));
         box5.setBorder(new TitledBorder("5"));
-
-        textField = new JTextField(10);
-        button = new JButton("Send");
-        comboBox = new JComboBox();
-        comboBox.setSize(10, 20);
-
-        textField2 = new JTextField(10);
-        button21 = new JButton("Rename");
-        button22 = new JButton("Button");
-        Box box21 = Box.createHorizontalBox();
-
-        textField3 = new JTextField(10);
-        button3 = new JButton("Set");
-        radioButton31 = new JRadioButton("Флаг 1");
-        radioButton32 = new JRadioButton("Флаг 2");
-        radioButton33 = new JRadioButton("Флаг 3");
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(radioButton31);
-        buttonGroup.add(radioButton32);
-        buttonGroup.add(radioButton33);
-
-        textField4 = new JTextField(10);
-        button4 = new JButton("Set");
-        checkBox41 = new JCheckBox("Флаг 1");
-        checkBox42 = new JCheckBox("Флаг 2");
-        checkBox43 = new JCheckBox("Флаг 3");
-
-        textField5 = new JTextField(10);
-        button51 = new JButton("Button1");
-        button52 = new JButton("Button2");
-        button53 = new JButton("Button3");
-        Box box51 = Box.createHorizontalBox();
-        table5= new JTable(data, headers);
-        JScrollPane scrollPane = new JScrollPane(table5);
-
         box.add(box1);
         box.add(box2);
         box.add(box3);
         box.add(box4);
         box.add(box5);
 
-        box1.add(comboBox);
-        box1.add(textField);
-        box1.add(button);
+        addToList = new JTextField(10);
+        sendComboBox = new JButton("Send");
+        comboBox = new JComboBox();
+        comboBox.setSize(10, 20);
 
-        box2.add(textField2);
-        box21.add(button21);
-        box21.add(button22);
+        textForButton = new JTextField(10);
+        rename = new JButton("Rename");
+        buttonForRename = new JButton("Button");
+
+        textForFlag = new JTextField(10);
+        setForRadio = new JButton("Set");
+        radioButton31 = new JRadioButton("1");
+        radioButton32 = new JRadioButton("2");
+        radioButton33 = new JRadioButton("3");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(radioButton31);
+        buttonGroup.add(radioButton32);
+        buttonGroup.add(radioButton33);
+
+        countCheck = new JTextField(10);
+        addCheck = new JButton("Add");
+        playStop = new JButton("Play/Stop");
+
+        textForTable = new JTextField(10);
+        setValueOfTable = new JButton("Button1");
+        setValueOfCell2 = new JButton("Button2");
+        setValueOfCell1 = new JButton("Button3");
+
+        box1.add(comboBox);
+        box1.add(addToList);
+        box1.add(sendComboBox);
+
+        box2.add(textForButton);
+        box21.add(rename);
+        box21.add(buttonForRename);
         box2.add(box21);
 
-        box3.add(textField3);
-        box3.add(button3);
+        box3.add(textForFlag);
+        box3.add(setForRadio);
         box3.add(radioButton31);
         box3.add(radioButton32);
         box3.add(radioButton33);
 
-        box4.add(textField4);
-        box4.add(button4);
-        box4.add(checkBox41);
-        box4.add(checkBox42);
-        box4.add(checkBox43);
+        box4.add(countCheck);
+        box4.add(addCheck);
+        box4.add(playStop);
 
-        box5.add(textField5);
-        box51.add(button51);
-        box51.add(button52);
-        box51.add(button53);
+        box5.add(textForTable);
+        box51.add(setValueOfTable);
+        box51.add(setValueOfCell2);
+        box51.add(setValueOfCell1);
         box5.add(box51);
+        table5 = new JTable(data, headers);
+        JScrollPane scrollPane = new JScrollPane(table5);
         box5.add(scrollPane);
+        frame.setContentPane(box);
 
-        setContentPane(box);
-        button.addActionListener(handler);
-        button21.addActionListener(handler);
-        button22.addActionListener(handler);
-        button3.addActionListener(handler);
-        button4.addActionListener(handler);
-        button51.addActionListener(handler);
-        button52.addActionListener(handler);
-        button53.addActionListener(handler);
-    }
-
-    public class eHandler implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            try {
-                if (e.getSource() == button) {
-                    for (int i=0; i<list.size(); i++) {
-                        if (list.get(i).equals(textField.getText())) {
-                            JOptionPane.showMessageDialog(null, "Объект уже существует");
-                            textField.setText("");
+        sendComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (addToList.getText() != null) {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).equals(addToList.getText())) {
+                            JOptionPane.showMessageDialog(null, "Error");
+                            addToList.setText("");
                             return;
                         }
                     }
-                    list.add(textField.getText());
-                    comboBox.addItem(textField.getText());
-                    list.add(textField.getText());
-                    textField.setText("");
+                    list.add(addToList.getText());
+                    comboBox.addItem(addToList.getText());
+                    list.add(addToList.getText());
+                    addToList.setText("");
                 }
-                if (e.getSource()==button21) {
-                    button22.setText(textField2.getText());
-                    textField2.setText("");
+            }
+        });
+
+        rename.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (textForButton.getText() != null) {
+                    buttonForRename.setText(textForButton.getText());
+                    textForButton.setText("");
                 }
-                if (e.getSource()==button22) {
-                    String textButton1 = button21.getText();
-                    button21.setText(button22.getText());
-                    button22.setText(textButton1);
-                }
-                if (e.getSource()==button3 && !textField3.getText().equals("")) {
-                    if (textField3.getText().equals(radioButton31.getText())) {
+            }
+        });
+
+        buttonForRename.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    String textButton1 = rename.getText();
+                    rename.setText(buttonForRename.getText());
+                    buttonForRename.setText(textButton1);
+            }
+        });
+
+        setForRadio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!textForFlag.getText().equals("")) {
+                    if (textForFlag.getText().equals(radioButton31.getText())) {
                         radioButton31.setSelected(true);
                         return;
                     }
-                    if (textField3.getText().equals(radioButton32.getText())) {
+                    if (textForFlag.getText().equals(radioButton32.getText())) {
                         radioButton32.setSelected(true);
                         return;
                     }
-                    if (textField3.getText().equals(radioButton33.getText())) {
+                    if (textForFlag.getText().equals(radioButton33.getText())) {
                         radioButton33.setSelected(true);
                         return;
                     }
-                    JOptionPane.showMessageDialog(null, "Ошибка");
+                    JOptionPane.showMessageDialog(null, "Error");
                 }
-                if (e.getSource()==button4) {
-                    if (textField4.getText().equals(checkBox41.getText())) {
-                        checkBox41.setSelected(true);
-                        return;
+            }
+        });
+
+
+
+        addCheck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    for (int i = 0; i < Integer.parseInt(countCheck.getText()); i++) {
+                        checkboxesList.add(new JCheckBox());
+                        box4.add(checkboxesList.get(i));
                     }
-                    if (textField4.getText().equals(checkBox42.getText())) {
-                        checkBox42.setSelected(true);
-                        return;
-                    }
-                    if (textField4.getText().equals(checkBox43.getText())) {
-                        checkBox43.setSelected(true);
-                        return;
-                    }
-                    JOptionPane.showMessageDialog(null, "Ошибка");
                 }
-                if (e.getSource()==button51) {
+        });
+
+        ActionListener taskPerformer = new ActionListener() {
+            int i = 0;
+            public void actionPerformed(ActionEvent evt) {
+                if (i < checkboxesList.size()) {
+                    checkboxesList.get(i).setSelected(!checkboxesList.get(i).isSelected());
+                    i++;
+                } else i = 0;
+            }
+        };
+
+        Timer timer = new Timer(200, taskPerformer);
+
+        playStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!b) {
+                    timer.start();
+                    b = true;
+                }
+                else {
+                    timer.stop();
+                    b = false;
+                }
+            }
+        });
+
+        setValueOfTable.addActionListener(new ActionListener() {
+            int i = 0;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == setValueOfTable && textForTable.getText() != null) {
                     Integer rowCount = table5.getRowCount();
-                    for (int i=0; i<rowCount; i++) {
-                        table5.setValueAt(textField5.getText(), i, 0);
-                    }
+                    table5.setValueAt(textForTable.getText(), i, 0);
+                    i++;
                 }
-                if (e.getSource()==button52) {
+            }
+        });
+
+        setValueOfCell2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == setValueOfCell2) {
                     int rowIndex = table5.getSelectedRow();
                     String strValue = table5.getValueAt(rowIndex, 0).toString();
-                    table5.setValueAt(strValue, rowIndex, 1);
-                    table5.setValueAt("", rowIndex, 0);
+                    if (table5.getValueAt(rowIndex, 1).toString().equals("")) {
+                        table5.setValueAt(strValue, rowIndex, 1);
+                        table5.setValueAt("", rowIndex, 0);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error");
+                    }
                 }
-                if (e.getSource()==button53) {
+            }
+        });
+
+        setValueOfCell1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == setValueOfCell1) {
                     int rowIndex = table5.getSelectedRow();
                     String strValue = table5.getValueAt(rowIndex, 1).toString();
-                    table5.setValueAt(strValue, rowIndex, 0);
-                    table5.setValueAt("", rowIndex, 1);
+                    if (table5.getValueAt(rowIndex, 0).toString().equals("")) {
+                        table5.setValueAt(strValue, rowIndex, 0);
+                        table5.setValueAt("", rowIndex, 1);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error");
+                    }
                 }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error");
             }
-        }
+        });
+
+        return frame;
     }
 }
+
+
